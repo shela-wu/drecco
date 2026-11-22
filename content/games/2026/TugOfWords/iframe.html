@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tug of Words</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="stage">
+
+    <!-- ===== Menu ===== -->
+    <section id="menu" class="screen">
+      <h1 class="logo">Tug of Words</h1>
+      <p class="tagline">One shared word. Change one letter at a time. Two ways to play.</p>
+
+      <div class="names">
+        <label class="name red">Red player <input id="name-red" maxlength="14" placeholder="Red"></label>
+        <label class="name blue">Blue player <input id="name-blue" maxlength="14" placeholder="Blue"></label>
+        <fieldset class="opponent">
+          <legend>Blue is</legend>
+          <label><input type="radio" name="opponent" value="human" checked> A person</label>
+          <label><input type="radio" name="opponent" value="easy"> Computer (Easy)</label>
+          <label><input type="radio" name="opponent" value="hard"> Computer (Hard)</label>
+        </fieldset>
+      </div>
+
+      <div class="modes">
+        <button class="mode-card" id="pick-simple" type="button">
+          <span class="mode-title red-text">Simple</span>
+          <span class="mode-sub">For younger players</span>
+          <span class="mode-rules">Get your target's letters into the word, anywhere. After each of your moves, score
+            1 point for every one of your letters in the word. Most points after 10 moves each wins.</span>
+          <span class="mode-go">Play Simple</span>
+        </button>
+        <button class="mode-card" id="pick-advanced" type="button">
+          <span class="mode-title blue-text">Advanced</span>
+          <span class="mode-sub">For older players</span>
+          <span class="mode-rules">Turn the word into your target word. After 10 moves each, whoever is fewer letters
+            away wins. A match is two games with seats swapped.</span>
+          <span class="mode-go">Play Advanced</span>
+        </button>
+      </div>
+
+      <div class="shared-rules">
+        <b>Every move:</b> change, add or remove exactly one letter. The result must be a real word, at most
+        7 letters, and no word can be used twice. You may pass instead; a pass uses one of your 10 moves
+        and scores nothing. If you have no legal move, you pass automatically.
+      </div>
+    </section>
+
+    <!-- ===== Game ===== -->
+    <section id="game" class="screen hidden">
+      <header class="topbar">
+        <div class="brand">Tug of Words <span id="mode-badge" class="badge"></span></div>
+        <div id="progress" class="progress"></div>
+        <button id="btn-menu" class="ghost" type="button">Menu</button>
+      </header>
+
+      <div class="board">
+        <aside class="player" id="panel-0"></aside>
+
+        <main class="center">
+          <div id="turn-banner" class="turn-banner"></div>
+          <div id="word" class="word"></div>
+          <div id="last-move" class="last-move"></div>
+
+          <form id="move-form" class="move-form" autocomplete="off">
+            <input id="move-input" maxlength="7" spellcheck="false" autocapitalize="off" aria-label="Your next word">
+            <button id="move-btn" type="submit">Play</button>
+            <button id="pass-btn" type="button" title="Skip your turn: uses one of your moves and scores nothing">Pass</button>
+          </form>
+          <div id="message" class="message" role="status"></div>
+        </main>
+
+        <aside class="player" id="panel-1"></aside>
+      </div>
+
+      <div class="history">
+        <div class="history-label">Words used (no repeats)</div>
+        <div id="history" class="history-words"></div>
+      </div>
+    </section>
+
+    <!-- ===== Result overlay ===== -->
+    <div id="overlay" class="overlay hidden">
+      <div class="result-card">
+        <div id="result-body"></div>
+        <div id="result-actions" class="result-actions"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="words.js"></script>
+  <script src="setups.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>
